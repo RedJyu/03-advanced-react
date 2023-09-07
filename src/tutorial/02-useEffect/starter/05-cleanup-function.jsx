@@ -21,6 +21,12 @@ const CleanupFunction = () => {
 const Test = () => {
   useEffect(() => {
     console.log('test test');
+    const initId = setInterval(() => {
+      console.log('iterval says hello');
+    }, 1000);
+    return () => {
+      clearInterval(initId);
+    };
   }, []);
   return <h1>test hello</h1>;
 };

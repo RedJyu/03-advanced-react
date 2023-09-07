@@ -21,6 +21,13 @@ const ShortCircuitExamples = () => {
       {user && <SomeComponent name={user.name} />}
       <h1>Ternary Operator</h1>
       <button className='btn'>{isEditing ? 'edit' : 'add'}</button>
+      {user ? (
+        <div>
+          <h4>hello {user.name}</h4>
+        </div>
+      ) : (
+        'no user'
+      )}
     </div>
   );
 };

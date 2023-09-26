@@ -1,9 +1,9 @@
-import useFetchPerson from './useFetchPerson';
+import useFetch from './useFetch';
 
 const url = 'https://api.github.com/users/QuincyLarson';
 
 const FetchData = () => {
-  const { isLoading, isError, user } = useFetchPerson(url);
+  const { isLoading, isError, data } = useFetch(url);
   // order matters
   // don't place user JSX before loading or error
 
@@ -13,7 +13,7 @@ const FetchData = () => {
   if (isError) {
     return <h2>There was an error...</h2>;
   }
-  const { avatar_url, name, company, bio } = user;
+  const { avatar_url, name, company, bio } = data;
   return (
     <div>
       <img

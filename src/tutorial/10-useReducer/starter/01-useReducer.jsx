@@ -5,15 +5,26 @@ import { data } from '../../../data';
 const defaultState = {
   people: data,
 };
+
+const CLEAR_LIST = 'CLEAR_LIST';
+const RESET_LIST = 'RESET_LIST';
+const REMOVE_ITEM = 'REMOVE_ITEM';
 //state and action are just parameters and can be named freely
 const reducer = (state, action) => {
-  if (action.type === 'CLEAR_LIST') {
-    // we should lways spread state as when we have many things in default they will get overwritten
+  if (action.type === CLEAR_LIST) {
+    // we should always spread state as when we have many things in default they will get overwritten
     return { ...state, people: [] };
   }
-  if (action.type === 'RESET_LIST') {
+  if (action.type === RESET_LIST) {
     return { ...state, people: data };
   }
+  if (action.type === REMOVE_ITEM) {
+    let newPeople = state.people.filter(
+      (person) => person.id !== action.payload.id
+    );
+    return { ...state, people: newPeople };
+  }
+  throw new Error(`No matching '${action.type}'-action type`);
 };
 
 const ReducerBasics = () => {
@@ -25,17 +36,18 @@ const ReducerBasics = () => {
 
   const removeItem = (id) => {
     // let newPeople = people.filter((person) => person.id !== id);
+    dispatch({ type: REMOVE_ITEM, payload: { id } });
     // setPeople(newPeople);
   };
 
   const clearList = () => {
     //dispatch is always looking for object and we HAVE to provide type that is string, usually its in UPPERCASE and has assigned variable
-    dispatch({ type: 'CLEAR_LIST' });
+    dispatch({ type: CLEAR_LIST });
     // setPeople([]);
   };
   const resetList = () => {
     // setPeople(data);
-    dispatch({ type: 'RESET_LIST' });
+    dispatch({ type: RESET_LIST });
   };
   return (
     <div>

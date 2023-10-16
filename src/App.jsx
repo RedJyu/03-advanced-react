@@ -1,12 +1,11 @@
-// import Starter from './tutorial/09-context-api/starter';
-import Navbar from './tutorial/09-context-api/starter/Navbar';
+import ReducerBasics from './tutorial/10-useReducer/starter/01-useReducer';
+import Starter from './tutorial/10-useReducer/starter/01-useReducer';
 
 function App() {
   return (
-    <div>
-      {/* // <div className='container'> */}
-      <Navbar />
-    </div>
+    <main className='container'>
+      <ReducerBasics />
+    </main>
   );
 }
 

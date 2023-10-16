@@ -1,7 +1,7 @@
-import React from 'react';
+import { useState, useReducer } from 'react';
 import { data } from '../../../data';
 const ReducerBasics = () => {
-  const [people, setPeople] = React.useState(data);
+  const [people, setPeople] = useState(data);
 
   const removeItem = (id) => {
     // let newPeople = people.filter((person) => person.id !== id);

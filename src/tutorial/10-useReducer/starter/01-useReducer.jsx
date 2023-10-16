@@ -1,6 +1,20 @@
 import { useState, useReducer } from 'react';
 import { data } from '../../../data';
+
+// as app grows we can add different things to default state like isOpen etc
+const defaultState = {
+  people: data,
+};
+
+const reducer = () => {};
+
 const ReducerBasics = () => {
+  // must pass function and default state
+  // its similar to useState but we get state and dispatch
+  // [state] all values will be represented here
+  // !!!IMPORTANT, we will use dispatch to say what action it will need to do do, it goes to reducer and reducer returns our state!!!
+  const [state, dispatch] = useReducer(reducer, defaultState);
+
   const [people, setPeople] = useState(data);
 
   const removeItem = (id) => {

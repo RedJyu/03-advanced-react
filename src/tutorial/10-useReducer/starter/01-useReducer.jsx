@@ -5,17 +5,23 @@ import { data } from '../../../data';
 const defaultState = {
   people: data,
 };
-
-const reducer = () => {};
+//state and action are just parameters and can be named freely
+const reducer = (state, action) => {
+  if (action.type === 'CLEAR_LIST') {
+    // we should lways spread state as when we have many things in default they will get overwritten
+    return { ...state, people: [] };
+  }
+  if (action.type === 'RESET_LIST') {
+    return { ...state, people: data };
+  }
+};
 
 const ReducerBasics = () => {
   // must pass function and default state
   // its similar to useState but we get state and dispatch
   // [state] all values will be represented here
-  // !!!IMPORTANT, we will use dispatch to say what action it will need to do do, it goes to reducer and reducer returns our state!!!
+  // !!!IMPORTANT, we will use dispatch to say what action it will need to do do, it goes to reducer and reducer returns our new state!!!
   const [state, dispatch] = useReducer(reducer, defaultState);
-
-  const [people, setPeople] = useState(data);
 
   const removeItem = (id) => {
     // let newPeople = people.filter((person) => person.id !== id);
@@ -23,14 +29,17 @@ const ReducerBasics = () => {
   };
 
   const clearList = () => {
+    //dispatch is always looking for object and we HAVE to provide type that is string, usually its in UPPERCASE and has assigned variable
+    dispatch({ type: 'CLEAR_LIST' });
     // setPeople([]);
   };
   const resetList = () => {
     // setPeople(data);
+    dispatch({ type: 'RESET_LIST' });
   };
   return (
     <div>
-      {people.map((person) => {
+      {state.people.map((person) => {
         const { id, name } = person;
         return (
           <div key={id} className='item'>
@@ -39,7 +48,7 @@ const ReducerBasics = () => {
           </div>
         );
       })}
-      {people.length < 1 ? (
+      {state.people.length < 1 ? (
         <button
           className='btn'
           style={{ marginTop: '2rem' }}

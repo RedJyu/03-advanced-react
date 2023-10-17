@@ -1,14 +1,12 @@
 import { useState, useReducer } from 'react';
 import { data } from '../../../data';
+import { CLEAR_LIST, RESET_LIST, REMOVE_ITEM } from './actions';
 
 // as app grows we can add different things to default state like isOpen etc
 const defaultState = {
   people: data,
 };
 
-const CLEAR_LIST = 'CLEAR_LIST';
-const RESET_LIST = 'RESET_LIST';
-const REMOVE_ITEM = 'REMOVE_ITEM';
 //state and action are just parameters and can be named freely
 const reducer = (state, action) => {
   if (action.type === CLEAR_LIST) {
